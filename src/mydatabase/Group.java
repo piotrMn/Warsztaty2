@@ -46,9 +46,9 @@ public class Group {
 			loadedGroup.name = resultSet.getString("name");
 			groups.add(loadedGroup);
 		}
-		Group[] uArray = new Group[groups.size()];
-		uArray = groups.toArray(uArray);
-		return uArray;
+		Group[] grArray = new Group[groups.size()];
+		grArray = groups.toArray(grArray);
+		return grArray;
 	}
 	
 	static public Group loadGroupById(Connection conn, int id) throws SQLException {

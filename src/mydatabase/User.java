@@ -79,7 +79,7 @@ public class User {
 		return uArray;
 	}
 
-	static public User loadUserById(Connection conn, int id) throws SQLException {
+	static public User loadById(Connection conn, int id) throws SQLException {
 		String sql = "SELECT * FROM users where id=?";
 		PreparedStatement preparedStatement;
 		preparedStatement = conn.prepareStatement(sql);
@@ -108,7 +108,7 @@ public class User {
 		}
 	}
 
-	public void saveUserToDB(Connection conn) throws SQLException {
+	public void saveToDB(Connection conn) throws SQLException {
 		if (this.id == 0) {
 			String sql = "INSERT INTO users(username, email, password, user_group_id) VALUES (?, ?, ?, ?)";
 			String generatedColumns[] = { "ID" };
@@ -134,5 +134,25 @@ public class User {
 			preparedStatement.setInt(5, this.getId());
 			preparedStatement.executeUpdate();
 		}
+	}
+
+	public static User[] loadAllByGrupId(Connection conn, int id) throws SQLException {
+		ArrayList<User> users = new ArrayList<>();
+		String sql = "SELECT * FROM users WHERE user_group=?";
+		PreparedStatement preparedStatement;
+		preparedStatement = conn.prepareStatement(sql);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		while (resultSet.next()) {
+			User loadedUser = new User();
+			loadedUser.id = resultSet.getInt("id");
+			loadedUser.username = resultSet.getString("username");
+			loadedUser.email = resultSet.getString("email");
+			loadedUser.password = resultSet.getString("password");
+			loadedUser.user_group_id = resultSet.getInt("user_group_id");
+			users.add(loadedUser);
+		}
+		User[] uArray = new User[users.size()];
+		uArray = users.toArray(uArray);
+		return uArray;
 	}
 }

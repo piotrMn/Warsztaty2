@@ -88,9 +88,9 @@ public class Solution {
 			loadedSolution.user_id = resultSet.getInt("user_id");
 			solutions.add(loadedSolution);
 		}
-		Solution[] uArray = new Solution[solutions.size()];
-		uArray = solutions.toArray(uArray);
-		return uArray;
+		Solution[] solArray = new Solution[solutions.size()];
+		solArray = solutions.toArray(solArray);
+		return solArray;
 	}
 
 	static public Solution loadSolutionById(Connection conn, int id) throws SQLException {
@@ -148,9 +148,50 @@ public class Solution {
 			preparedStatement.setString(3, this.description);
 			preparedStatement.setInt(4, this.exercise_id);
 			preparedStatement.setInt(5, this.getUser_id());
-			preparedStatement.setInt(6,this.getId());
+			preparedStatement.setInt(6, this.getId());
 			preparedStatement.executeUpdate();
 		}
 	}
 
+	public static Solution[] loadAllByUserId(Connection conn, int id) throws SQLException {
+		ArrayList<Solution> solutions = new ArrayList<>();
+		String sql = "SELECT * FROM solutions where user_id=?";
+		PreparedStatement preparedStatement;
+		preparedStatement = conn.prepareStatement(sql);
+		ResultSet rs = preparedStatement.executeQuery();
+		while (rs.next()) {
+			Solution loadedSolution = new Solution();
+			loadedSolution.id = rs.getInt("id");
+			loadedSolution.created = rs.getDate("created");
+			loadedSolution.updated = rs.getDate("updated");
+			loadedSolution.description = rs.getString("description");
+			loadedSolution.exercise_id = rs.getInt("exercise_id");
+			loadedSolution.user_id = rs.getInt("user_id");
+			solutions.add(loadedSolution);
+		}
+		Solution[] solArray = new Solution[solutions.size()];
+		solArray = solutions.toArray(solArray);
+		return solArray;
+	}
+
+	public static Solution[] loadAllByExerciseId(Connection conn, int id) throws SQLException {
+		ArrayList<Solution> solutions = new ArrayList<>();
+		String sql = "SELECT * FROM solutions where exercise_id=?";
+		PreparedStatement preparedStatement;
+		preparedStatement = conn.prepareStatement(sql);
+		ResultSet rs = preparedStatement.executeQuery();
+		while (rs.next()) {
+			Solution loadedSolution = new Solution();
+			loadedSolution.id = rs.getInt("id");
+			loadedSolution.created = rs.getDate("created");
+			loadedSolution.updated = rs.getDate("updated");
+			loadedSolution.description = rs.getString("description");
+			loadedSolution.exercise_id = rs.getInt("exercise_id");
+			loadedSolution.user_id = rs.getInt("user_id");
+			solutions.add(loadedSolution);
+		}
+		Solution[] solArray = new Solution[solutions.size()];
+		solArray = solutions.toArray(solArray);
+		return solArray;
+	}
 }

@@ -54,9 +54,9 @@ public class Exercise {
 			loadedExercise.description = resultSet.getString("description");
 			exercises.add(loadedExercise);
 		}
-		Exercise[] uArray = new Exercise[exercises.size()];
-		uArray = exercises.toArray(uArray);
-		return uArray;
+		Exercise[] exArray = new Exercise[exercises.size()];
+		exArray = exercises.toArray(exArray);
+		return exArray;
 	}
 	
 	static public Exercise loadExerciseById(Connection conn, int id) throws SQLException {
