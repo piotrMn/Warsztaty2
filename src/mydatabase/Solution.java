@@ -48,20 +48,28 @@ public class Solution {
 		return exercise_id;
 	}
 
-	public void setExercise_id(Exercise exercise) {
-		this.exercise_id = exercise.getId();
+	public void setExercise_id(int exercise_id) {
+		this.exercise_id = exercise_id;
 	}
 
 	public int getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(User user) {
-		this.user_id = user.getId();
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
 
 	public Solution() {
 
+	}
+
+	public Solution(Date created, Date updated, String description, Exercise exercise, User user) {
+		this.created = created;
+		this.updated = updated;
+		this.description = description;
+		this.exercise_id = exercise.getId();
+		this.user_id = user.getId();
 	}
 
 	public Solution(Date created, Date updated, String description, int exercise_id, int user_id) {

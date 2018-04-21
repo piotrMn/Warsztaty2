@@ -52,6 +52,13 @@ public class User {
 
 	}
 
+	public User(String username, String email, String password, Group group) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.user_group_id = group.getId();
+	}
+	
 	public User(String username, String email, String password, int user_group_id) {
 		this.username = username;
 		this.email = email;
